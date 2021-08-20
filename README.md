@@ -1,4 +1,4 @@
-# Sistema para un LavaCard
+# Sistema para un LavaCar
 
 
 ## Comenzando 🚀
@@ -10,22 +10,6 @@ _Clona el repositorio y HAPPY CODING!._
 
 _Cambiar la ruta de conexion en la capa de AccedoDatos y restaura los paquetes nuget_
 
-
-### Instalación 🔧
-
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
-
-_Dí cómo será ese paso_
-
-```
-Da un ejemplo
-```
-
-_Y repite_
-
-```
-hasta finalizar
-```
 
 ## Construido con 🛠️
 
