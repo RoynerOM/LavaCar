@@ -40,8 +40,8 @@
         <br />
         <br />
         <div class="col-md-6 ml-md-5 mt-5">
-            <div class="table-responsive table-sm table-striped">
-                <table class="table">
+            <div class="table-responsive">
+                <table class="table table-sm table-striped table-hover">
                     <thead>
                         <tr>
                             <th>
@@ -60,7 +60,7 @@
                                 <td class="text-center">@item.Descripcion</td>
                                 <td class="text-center">@item.Monto</td>
                                 <td class="text-center">
-                                    <a asp-controller="Lista" asp-action="Index" class="btn btn-dark text-white" asp-route-id="@item.IdServicio"><i class="fas fa-list-alt"></i></a>
+                                    <a id="bg-purple-3" asp-controller="Lista" asp-action="Index" class="btn text-white" asp-route-id="@item.IdServicio"><i class="fas fa-list-alt"></i></a>
                                 </td>
                             </tr>
                         }

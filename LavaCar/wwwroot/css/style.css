@@ -1,0 +1,16 @@
+﻿#bg-purple {
+    background: #170055;
+}
+
+#bg-purple-2 {
+    background: #AE00FB;
+}
+
+#bg-purple-3 {
+    background: #3E00FF;
+}
+
+.shadow {
+    box-shadow: 0px 10px 12px rgba(0,0,0,0.1);
+    transition: 0.5s;
+}
