@@ -1,0 +1,45 @@
+﻿@model Servicio
+<div class="container-fluid">
+    @if (TempData["msj"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["msj"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>}
+    <div class="row justify-content-center">
+
+        <div class="col-md-5 mr-sm-3">
+            <h2>Registro de servicios</h2>
+            <partial name="Create" model="@Model" />
+        </div>
+        <div class="table-responsive col-md-6 ml-sm-3 mt-5">
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                        </th>
+                        <th class="text-center">Servicio</th>
+                        <th class="text-center">Costo</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.Servicios)
+                    {
+                        <tr>
+                            <td style="font-size: 1px; width: 1px;" class="text-center">@item.IdServicio</td>
+                            <td class="text-center">@item.Descripcion</td>
+                            <td class="text-center">@item.Monto</td>
+                            <td class="text-center">
+                                <a asp-controller="Servicio" asp-action="Delete" class="btn btn-danger text-white" asp-route-id="@item.IdServicio"><i class="fas fa-trash-alt"></i></a>
+                                <a asp-controller="Servicio" asp-action="Edit" class="btn btn-info text-white" asp-route-id="@item.IdServicio"><i class="fas fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

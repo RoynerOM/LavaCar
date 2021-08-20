@@ -1,0 +1,16 @@
+﻿@model VehiculoServicio
+
+<div class="container">
+    <div class="card col-md-3 ml-3 mr-3 mb-5" style="width: 18rem;">
+        <div class="card-body">
+            <form asp-action="Delete" method="POST">
+                <input type="hidden" asp-for="IdVehiculoServicio" />
+                <h5 class="card-title text-center">@Model.IdVehiculoNavigation.Dueno</h5>
+                <p><strong>Marca: </strong> @Model.IdVehiculoNavigation.Marca</p>
+                <p><strong>Placa: </strong> @Model.IdVehiculoNavigation.Placa</p>
+                <p><strong>Servicio: </strong> @Model.IdServicioNavigation.Descripcion</p>
+                <input class="btn btn-danger" type="submit" value="Eliminar" />
+            </form>
+        </div>
+    </div>
+</div>

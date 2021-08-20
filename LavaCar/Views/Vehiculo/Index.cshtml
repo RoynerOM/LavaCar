@@ -1,0 +1,55 @@
+﻿@model Vehiculo
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container-fluid">
+    
+    @if (TempData["msj"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["msj"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>}
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-5 mr-3">
+            <h2 class="text-center">Registro de vehiculos</h2>
+            <partial name="Create" model="@Model" />
+        </div>
+        <br />
+        <br />
+        <div class="col-md-6 ml-md-5 mt-5">
+            <div class="table-responsive table-sm table-striped">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                
+                            </th>
+                            <th class="text-center">Servicio</th>
+                            <th class="text-center">Costo</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.lista)
+                        {
+                            <tr>
+                                <td style="font-size: 1px; width: 1px;" class="text-center">@item.IdServicio</td>
+                                <td class="text-center">@item.Descripcion</td>
+                                <td class="text-center">@item.Monto</td>
+                                <td class="text-center">
+                                    <a asp-controller="Lista" asp-action="Index" class="btn btn-dark text-white" asp-route-id="@item.IdServicio"><i class="fas fa-list-alt"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+﻿@model VehiculoModel
+<form asp-action="Create" method="POST">
+    <!--Validar el modelo-->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label asp-for="Placa"></label>
+            <input asp-for="Placa" class="form-control" required>
+            <span asp-validation-for="Placa" class="text-danger"></span>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label asp-for="Dueno">Dueño</label>
+            <input asp-for="Dueno" class="form-control" required>
+            <span asp-validation-for="Dueno" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Marca"></label>
+            <input asp-for="Marca" class="form-control" required>
+            <span asp-validation-for="Marca" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Eliga un servicio</label>
+            <select asp-for="IdServicio" class="form-control" asp-items="ViewBag.Servicio">
+            </select>
+        </div>
+        <div class="col-md-12 mt-3">
+            <input type="submit" class="btn btn-primary text-white" value="Registrar">
+        </div>
+        <div class="col-md-12 mt-3">
+            <a asp-action="ListarVehiculos" class="btn btn-warning">Ver Lista De Vehiculos Registrados</a>
+        </div>
+    </div>
+</form>

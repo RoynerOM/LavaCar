@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Vehiculo>
+<div class="mb-4">
+    <h1 class="text-center">Lista de vehiculos registrados</h1>
+</div>
+@if (TempData["msj"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["msj"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<div class="text-left sticky-top" style="top: 10px">
+
+    <a href="/Vehiculo/Index" class="btn btn-dark mb-5">Ir al registro</a>
+</div>
+<div class="table-responsive">
+    <table class="table table-sm table-bordered table-hover table table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Placa</th>
+                <th class="text-center">Dueño</th>
+                <th class="text-center">Marca</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">@item.IdVehiculo</td>
+                    <td class="text-center">@item.Placa</td>
+                    <td class="text-center">@item.Dueno</td>
+                    <td class="text-center">@item.Marca</td>
+                    <td class="text-center text-white">
+                        <a asp-action="Edit" asp-route-id="@item.IdVehiculo" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.IdVehiculo" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

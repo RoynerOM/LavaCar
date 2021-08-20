@@ -1,0 +1,29 @@
+﻿@model Servicio
+    <br />
+    <h2 class="text-center">Editar información de este servicio?</h2>
+    <div class="row justify-content-center">
+        <form asp-action="Edit" method="POST" class="col-md-6">
+
+            <!--Validar el modelo-->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdServicio" />
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="Descripcion">Descripción</label>
+                    <input asp-for="Descripcion" class="form-control" required>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label asp-for="Monto"></label>
+                    <input asp-for="Monto" class="form-control" required>
+                    <span asp-validation-for="Monto" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <input type="submit" class="btn btn-primary text-white" value="Editar">
+                </div>
+                <div class="col-md-12 mt-3">
+                    <a asp-action="Index" class="btn btn-warning">Ver Lista De Servicios Registrados</a>
+                </div>
+            </div>
+        </form>
+    </div>

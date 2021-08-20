@@ -1,0 +1,20 @@
+﻿@model Servicio
+<form asp-action="Create" method="POST">
+    <!--Validar el modelo-->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label asp-for="Descripcion">Descripción</label>
+            <input asp-for="Descripcion" class="form-control" required>
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label asp-for="Monto"></label>
+            <input asp-for="Monto" class="form-control" required>
+            <span asp-validation-for="Monto" class="text-danger"></span>
+        </div>
+        <div class="col-md-12 mt-3">
+            <input type="submit" class="btn btn-primary text-white" value="Registrar">
+        </div>
+    </div>
+</form>

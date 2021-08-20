@@ -1,0 +1,36 @@
+﻿@model Vehiculo
+    <div class="text-center mt-4">
+        <h2>Editar información de vehículo</h2>
+    </div>
+<div class="row justify-content-center mt-4">
+    <div class="col-md-5">
+        <form asp-action="Edit" method="POST">
+            <!--Validar el modelo-->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdVehiculo" />
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="Placa"></label>
+                    <input asp-for="Placa" class="form-control" required>
+                    <span asp-validation-for="Placa" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label asp-for="Dueno">Dueño</label>
+                    <input asp-for="Dueno" class="form-control" required>
+                    <span asp-validation-for="Dueno" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label asp-for="Marca"></label>
+                    <input asp-for="Marca" class="form-control" required>
+                    <span asp-validation-for="Marca" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <input type="submit" class="btn btn-primary text-white" value="Editar">
+                </div>
+                <div class="col-md-12 mt-3">
+                    <a asp-action="ListarVehiculos" class="btn btn-warning">Ver Lista De Vehiculos Registrados</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
