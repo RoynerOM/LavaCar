@@ -52,5 +52,17 @@ namespace LogicaNegocio
         {
             return dv.Eliminar(vehiculo);
         }
+
+        public IEnumerable<Vehiculo> ObtenerVehiculos(string dueno)
+        {
+            if (dueno == null)
+            {
+                return dv.Obtener();
+            }
+            else
+            {
+                return dv.Obtener().Where(x => x.Dueno == dueno);
+            }
+        }
     }
 }

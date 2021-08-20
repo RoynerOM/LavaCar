@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<Entidades.VehiculoServicio>
+@model Paginador<VehiculoServicio>
 
 @{
     ViewData["Title"] = "View";
@@ -33,13 +33,23 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>}
+<div class="row justify-content-center">
+    <form method="get" action=@Url.Action("Index", "Lista" )>
+        <div class="form-group d-flex">
+            @Html.TextBox("buscar", null, new { placeholder = "texto de búsqueda", @class = "form-control" })
+            <button class="btn btn-info ml-4" type="submit">Buscar</button>
+            <a asp-action="Index" id="bg-purple" class="btn btn-info ml-4">Refrescar</a>
+        </div>
+       
+    </form>
+</div>
 <div class="text-left sticky-top" style="top: 10px">
 
     <a id="bg-purple" href="/Vehiculo/Index" class="btn btn-dark mb-5">Ir al registro</a>
 </div>
 <div class="container">
     <div class="row d-flex justify-content-center" style="gap:40px 20px">
-        @foreach (var item in Model)
+        @foreach (var item in Model.Resultado)
         {
             <div class="card shadow ">
                 <div class="card-body" style="width:300px">
@@ -55,5 +65,70 @@
             </div>
         }
     </div>
+    <br />
+    <br />
+    @if (Model.Resultado.Count() > 0)
+    {
+        <span>
+            <strong>@Model.TotalRegistros</strong> registros encontrados
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            Página <strong>@(Model.PaginaActual)</strong> de
+            <strong>@Model.TotalPaginas</strong>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+    }
+    else
+    {
+        <span>No hay resultados para esta búsqueda</span>
+        <span>&nbsp;|&nbsp;</span>
+    }
+
+    @if (Model.PaginaActual > 1)
+    {
+        @*@Html.ActionLink("<<", "/Vehiculo/ListarVehiculos", new { pagina = 1 },
+            new { @class = "btn btn-sm btn-default" })*@
+        <a asp-action="Index" asp-route-pagina="1">
+            <i class="fas fa-backward"></i>
+        </a>
+        <span></span>
+        @Html.ActionLink("Anterior", "Index", new { pagina = Model.PaginaActual - 1 },
+                        new { @class = "btn btn-sm btn-default" })
+    }
+    else
+    {
+        @*@Html.ActionLink("<<", "ListarVehiculos", new { pagina = 1 },
+            new { @class = "btn btn-sm btn-default disabled" })*@
+        <a asp-action="Index" asp-route-pagina="1">
+            <i class="fas fa-backward"></i>
+        </a>
+        <span></span>
+        @Html.ActionLink("Anterior", "Index", new { pagina = 1 },
+                        new { @class = "btn btn-sm btn-default disabled" })
+    }
+    <span></span>
+    @if (Model.PaginaActual < Model.TotalPaginas)
+    {
+        @Html.ActionLink("Siguiente", "Index", new { pagina = Model.PaginaActual + 1 },
+                        new { @class = "btn btn-sm btn-default" })
+        <span></span>
+        <a asp-action="Index" asp-route-pagina="@Model.TotalPaginas">
+            <i class="fas fa-forward"></i>
+        </a>
+
+    }
+    else
+    {
+        @Html.ActionLink("Siguiente", "Index", new { pagina = Model.TotalPaginas - 1 },
+                        new { @class = "btn btn-sm btn-default disabled" })
+        <span></span>
+        @*@Html.ActionLink(">>", "ListarVehiculos", new { pagina = Model.TotalPaginas },
+            new { @class = "btn btn-sm btn-default disabled" })*@
+
+        <a asp-action="Index" asp-route-pagina="@Model.TotalPaginas" class="btn btn-sm btn-default disabled">
+            <i class="fas fa-forward"></i>
+        </a>
+    }
 </div>
 
