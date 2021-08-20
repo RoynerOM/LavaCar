@@ -63,22 +63,20 @@ namespace AccesoDatos
                     var relaciones = db.VehiculoServicios
                                    .Include(x => x.IdServicioNavigation)
                                    .Include(x => x.IdVehiculoNavigation)
-                                   .Where(x => x.IdVehiculoNavigation == vehiculo).ToList();
+                                   .Where(x => x.IdVehiculoNavigation.IdVehiculo == vehiculo.IdVehiculo).ToList();
 
-                    if (relaciones.Count() > 1)
+                    if (relaciones.Count() > 0)
                     {
                         foreach (var item in relaciones)
                         {
                             db.VehiculoServicios.Remove(item);
                         }
-                        db.SaveChanges();
                     }
                     else
                     {
                         db.Vehiculos.Remove(vehiculo);
-                        db.SaveChanges();
                     }
-                    
+                    db.SaveChanges();
                     return true;
                 }
             }

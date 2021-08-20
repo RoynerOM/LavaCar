@@ -11,6 +11,9 @@ namespace Presentacion.Controllers
     public class ServicioController : Controller
     {
         ServicioNegocio sn = new();
+
+
+        //Vista principal de Servicio
         public IActionResult Index()
         {
             var listaServicios = sn.Obtener();
@@ -23,13 +26,12 @@ namespace Presentacion.Controllers
         }
 
 
-        //Guardar
+
+        //Guardar un Servicio
         [HttpPost]
-        //Guardar un vehiculo
         public IActionResult Create(Servicio servicio)
         {
-
-            var vDato = sn.ObtenerById(servicio.IdServicio);
+            var vDato = sn.ObtenerByName(servicio.Descripcion);
 
             if (vDato == null)
             {
@@ -38,19 +40,22 @@ namespace Presentacion.Controllers
                     if (sn.Guardar(servicio) == true)
                     {
                         TempData["msj"] = "Este servicio se ha registrado con éxito";
-                        return RedirectToAction("index");
+                       
                     }
+                    return RedirectToAction("index");
                 }
             }
-            
-            return View();
+            else
+            {
+                TempData["error"] = "No se puede guardar por que hay un servicio que tiene el mismo nombre";
+            }
+            return RedirectToAction("index");
         }
 
 
-
+        //GET/ID
         public IActionResult Edit(int id)
         {
-
             if (id == 0)
             {
                 return NotFound();
@@ -66,7 +71,7 @@ namespace Presentacion.Controllers
 
 
 
-        //Editar Vehiculos
+        //Editar un servicio
         [HttpPost]
         public IActionResult Edit(int id, Servicio servicio)
         {
@@ -81,6 +86,10 @@ namespace Presentacion.Controllers
                 if (sn.Editar(servicio) == true)
                 {
                     TempData["msj"] = "Información de servicio actualizado";
+                }
+                else
+                {
+                    TempData["error"] = "Error al editar";
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -109,7 +118,7 @@ namespace Presentacion.Controllers
 
 
 
-        //Editar Vehiculos
+        //Eliminar un servicio
         [HttpPost]
         public IActionResult Delete(int id, Servicio servicio)
         {
@@ -124,6 +133,10 @@ namespace Presentacion.Controllers
                 if (sn.Elimiar(servicio) == true)
                 {
                     TempData["msj"] = "Información de servicio eliminado";
+                }
+                else
+                {
+                    TempData["error"] = "Error al eliminar este servicio";
                 }
                 return RedirectToAction(nameof(Index));
             }

@@ -24,10 +24,12 @@ namespace LogicaNegocio
         }
 
 
+
         public Servicio ObtenerById(int id)
         {
             return sn.ObtenerById(id);
         }
+
 
 
         public bool Editar(Servicio servicio)
@@ -36,9 +38,17 @@ namespace LogicaNegocio
         }
 
 
+
         public bool Elimiar(Servicio servicio)
         {
             return sn.Eliminar(servicio);
+        }
+
+
+
+        public Servicio ObtenerByName(string name)
+        {
+            return sn.ObtenerByName(name);
         }
     }
 }

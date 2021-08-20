@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Entidades;
 using LogicaNegocio;
 
-namespace LavaCar.Controllers
+namespace Presentacion.Controllers
 {
     public class HomeController : Controller
     {

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LavaCar
+namespace Presentacion
 {
     public class Startup
     {
@@ -50,7 +50,7 @@ namespace LavaCar
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Vehiculo}/{action=Index}/{id?}");
             });
         }
     }

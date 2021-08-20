@@ -14,6 +14,8 @@ namespace Presentacion.Controllers
 
         VehiculoNegocio vehiculoNegocio = new();
         VehiculoServicioNegocio vehiculoServicio = new();
+
+        //Vista principal de Vehiculos
         public IActionResult Index()
         {
             var listaServicios = vehiculoNegocio.ObtenerServicios();
@@ -23,7 +25,7 @@ namespace Presentacion.Controllers
         }
 
 
-
+        //Lista de los vehiculos
         public IActionResult ListarVehiculos()
         {
             var listaVehiculos = vehiculoNegocio.Obtener();
@@ -58,14 +60,19 @@ namespace Presentacion.Controllers
                     if (vehiculoNegocio.Guardar(v) == true && vehiculoServicio.Guardar(v, vehiculo.IdServicio))
                     {
                         TempData["msj"] = "Este vehículo se ha registrado con éxito";
-                        return RedirectToAction("index");
+                       
                     }
+                    else
+                    {
+                        TempData["error"] = "Error al eliminar información de este vehículo";
+                    }
+                    return RedirectToAction("index");
                 }
             }
             else
             {
                 vehiculoServicio.Guardar(vDato, vehiculo.IdServicio);
-                TempData["msj"] = "Este vehículo ya ha sido registrado, por ende sele asignó un nuevo servicio";
+                TempData["warning"] = "Este vehículo ya ha sido registrado, por ende se ha asignado un nuevo servicio";
                 return RedirectToAction("index");
             }
 
@@ -73,6 +80,7 @@ namespace Presentacion.Controllers
 
             return View();
         }
+
 
 
         //GET/ID
@@ -92,6 +100,8 @@ namespace Presentacion.Controllers
             return View(vehiculo);
         }
 
+
+
         //Editar Vehiculos
         [HttpPost]
         public IActionResult Edit(int id, Vehiculo vehiculo)
@@ -108,6 +118,10 @@ namespace Presentacion.Controllers
                 {
                     TempData["msj"] = "Informacion de vehiculo actualizado";
                 }
+                else
+                {
+                    TempData["error"] = "Error al editar";
+                }
                 return RedirectToAction(nameof(ListarVehiculos));
             }
 
@@ -119,7 +133,6 @@ namespace Presentacion.Controllers
         //GET/ID
         public IActionResult Delete(int id)
         {
-
             if (id == 0)
             {
                 return NotFound();
@@ -133,11 +146,12 @@ namespace Presentacion.Controllers
             return View(vehiculo);
         }
 
+
+
         //Editar Vehiculos
         [HttpPost]
         public IActionResult Delete(int id, Vehiculo vehiculo)
         {
-
             if (id != vehiculo.IdVehiculo)
             {
                 return NotFound();
@@ -147,7 +161,11 @@ namespace Presentacion.Controllers
             {
                 if (vehiculoNegocio.Elimiar(vehiculo) == true)
                 {
-                    TempData["msj"] = "Informacion de vehiculo eliminado";
+                    TempData["msj"] = "Información de vehículo eliminado";
+                }
+                else
+                {
+                    TempData["error"] = "Error al eliminar";
                 }
                 return RedirectToAction(nameof(ListarVehiculos));
             }

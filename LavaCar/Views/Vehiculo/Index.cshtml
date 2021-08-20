@@ -5,7 +5,7 @@
 
 
 <div class="container-fluid">
-    
+
     @if (TempData["msj"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -14,6 +14,24 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>}
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["error"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>}
+
+    @if (TempData["warning"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["warning"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>}
+
     <div class="row d-flex justify-content-center">
         <div class="col-md-5 mr-3">
             <h2 class="text-center">Registro de vehiculos</h2>
@@ -27,7 +45,7 @@
                     <thead>
                         <tr>
                             <th>
-                                
+
                             </th>
                             <th class="text-center">Servicio</th>
                             <th class="text-center">Costo</th>

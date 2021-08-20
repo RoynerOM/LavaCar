@@ -57,22 +57,22 @@ namespace AccesoDatos
                     var relaciones = db.VehiculoServicios
                                    .Include(x => x.IdServicioNavigation)
                                    .Include(x => x.IdVehiculoNavigation)
-                                   .Where(x => x.IdServicioNavigation == servicio).ToList();
+                                   .Where(x => x.IdServicioNavigation.IdServicio == servicio.IdServicio).ToList();
 
-                    if (relaciones.Count() > 1)
+                    if (relaciones.Count() > 0)
                     {
+                        //Se eliminan cada una de las relaciones
                         foreach (var item in relaciones)
                         {
                             db.VehiculoServicios.Remove(item);
-                            db.SaveChanges();
                         }
                     }
                     else
                     {
                         db.Servicios.Remove(servicio);
-                        db.SaveChanges();
+                        
                     }
-
+                    db.SaveChanges();
                     return true;
                 }
             }
@@ -131,6 +131,34 @@ namespace AccesoDatos
             {
                 Console.WriteLine(ex);
                 return false;
+            }
+        }
+
+
+        //Buscar por nombre
+        public Servicio ObtenerByName(string name)
+        {
+            try
+            {
+                using (var db = new LavaCarDbContext())
+                {
+                    var dato = db.Servicios.Where(x => x.Descripcion == name).SingleOrDefault();
+
+                    if (dato != null)
+                    {
+                        return dato;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+                return null;
             }
         }
     }
