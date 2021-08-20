@@ -57,21 +57,18 @@ namespace AccesoDatos
                     var relaciones = db.VehiculoServicios
                                    .Include(x => x.IdServicioNavigation)
                                    .Include(x => x.IdVehiculoNavigation)
-                                   .Where(x => x.IdServicioNavigation.IdServicio == servicio.IdServicio).ToList();
+                                   .Where(x => x.IdServicio == servicio.IdServicio).ToList();
 
                     if (relaciones.Count() > 0)
                     {
-                        //Se eliminan cada una de las relaciones
                         foreach (var item in relaciones)
                         {
-                            db.VehiculoServicios.Remove(item);
-                        }
+                            db.Entry<VehiculoServicio>(item).State = EntityState.Deleted;
+                        }  
                     }
-                    else
-                    {
-                        db.Servicios.Remove(servicio);
-                        
-                    }
+
+                    db.SaveChanges();
+                    db.Entry<Servicio>(servicio).State = EntityState.Deleted;
                     db.SaveChanges();
                     return true;
                 }

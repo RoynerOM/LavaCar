@@ -69,13 +69,12 @@ namespace AccesoDatos
                     {
                         foreach (var item in relaciones)
                         {
-                            db.VehiculoServicios.Remove(item);
+                            db.Entry<VehiculoServicio>(item).State = EntityState.Deleted;
                         }
                     }
-                    else
-                    {
-                        db.Vehiculos.Remove(vehiculo);
-                    }
+                    db.SaveChanges();
+                    //db.Vehiculos.Remove(vehiculo);
+                    db.Entry<Vehiculo>(vehiculo).State = EntityState.Deleted;
                     db.SaveChanges();
                     return true;
                 }
